@@ -1,0 +1,9 @@
+2025-06-15 15:07:33|INFO    |root                            |Scheduler will use this timezone: America/Recife|
+2025-06-15 15:07:37|INFO    |waitress                        |BAZARR is started and waiting for requests on: http://***.***.***.***:6767|
+2025-06-15 15:07:37|INFO    |waitress                        |BAZARR is started and waiting for requests on: http://[::]:6767|
+2025-06-15 19:26:27|INFO    |root                            |Scheduler will use this timezone: America/Recife|
+2025-06-15 19:26:32|INFO    |waitress                        |BAZARR is started and waiting for requests on: http://***.***.***.***:6767|
+2025-06-15 19:26:32|INFO    |waitress                        |BAZARR is started and waiting for requests on: http://[::]:6767|
+2025-06-15 19:34:00|INFO    |root                            |Scheduler will use this timezone: America/Recife|
+2025-06-15 19:34:03|INFO    |waitress                        |BAZARR is started and waiting for requests on: http://***.***.***.***:6767|
+2025-06-15 19:34:03|INFO    |waitress                        |BAZARR is started and waiting for requests on: http://[::]:6767|

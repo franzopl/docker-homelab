@@ -1,0 +1,15 @@
+services:
+    privtracker:
+        image: meehow/privtracker
+        restart: unless-stopped
+        user: 1000:1000
+        environment:
+            - PORT=1337
+        # volume is only needed if we listed on port 443
+        volumes:
+            - autocert:/.cache/golang-autocert
+        ports:
+            - 1337:1337
+
+volumes:
+    autocert:
