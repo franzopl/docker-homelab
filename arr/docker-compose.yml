@@ -8,7 +8,7 @@ services:
       - PGID=1000
       - TZ=America/Recife
     volumes:
-      - ~/docker/radarr:/config
+      - ~/radarr:/config
       - /mnt:/mnt #optional
       - /media:/media
       
@@ -25,7 +25,7 @@ services:
       - PGID=1000
       - TZ=America/Recife
     volumes:
-      - ~/docker/sonarr:/config
+      - ~/sonarr:/config
       - /mnt:/mnt #optional
       - /media:/media
     ports:
@@ -41,7 +41,7 @@ services:
       - PGID=1000
       - TZ=America/Recife
     volumes:
-      - ~/docker/lidarr:/config
+      - ~/lidarr:/config
       - /mnt:/mnt #optional
       - /media:/media
     ports:
@@ -56,7 +56,7 @@ services:
       - PGID=1000
       - TZ=America/Recife
     volumes:
-      - ~/docker/prowlarr:/config
+      - ~/prowlarr:/config
       - /mnt:/mnt #optional
       - /media:/media
     ports:
@@ -71,7 +71,7 @@ services:
       - PGID=1000
       - TZ=America/Recife
     volumes:
-      - ~/docker/bazarr:/config
+      - ~/bazarr:/config
       - /mnt:/mnt #optional
       - /media:/media
     ports:

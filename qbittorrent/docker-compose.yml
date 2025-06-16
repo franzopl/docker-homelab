@@ -15,7 +15,7 @@ services:
       - "56660:56660"
       - "56660:56660/udp"
     volumes:
-      - ~/docker/qbittorrent:/config # Volume para configurações
+      - ~/qbittorrent:/config # Volume para configurações
       - /media:/media # Caminho para salvar downloads
       - /home:/home
     restart: unless-stopped

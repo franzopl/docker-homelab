@@ -5,9 +5,9 @@ services:
     container_name: filebrowser
     volumes:
       - /:/srv
-      - ~/docker/filebrowser/config:/config
-      - ~/docker/filebrowser/filebrowser.db:/database.db \
-      - ~/docker/filebrowser/.filebrowser.json:/.filebrowser.json \
+      - ~/filebrowser/config:/config
+      - ~/filebrowser/filebrowser.db:/database.db \
+      - ~/filebrowser/.filebrowser.json:/.filebrowser.json \
     ports:
       - "48082:80"
     environment:
