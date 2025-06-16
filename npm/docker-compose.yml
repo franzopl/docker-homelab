@@ -19,8 +19,8 @@ services:
       # Uncomment this if IPv6 is not enabled on your host
       # DISABLE_IPV6: 'true'
     volumes:
-      - ~/npm/data:/data
-      - ~/npm/letsencrypt:/etc/letsencrypt
+      - ../services/npm/data:/data
+      - ../services/npm/letsencrypt:/etc/letsencrypt
     depends_on:
       - db
 
@@ -34,4 +34,4 @@ services:
       MYSQL_PASSWORD: 'npm'
       MARIADB_AUTO_UPGRADE: '1'
     volumes:
-      - ~/npm/mysql:/var/lib/mysql
+      - ../services/npm/mysql:/var/lib/mysql

@@ -1,5 +1,6 @@
 services:
     privtracker:
+        container_name: privtracker
         image: meehow/privtracker
         restart: unless-stopped
         user: 1000:1000

@@ -5,9 +5,9 @@ services:
     container_name: filebrowser
     volumes:
       - /:/srv
-      - ~/filebrowser/config:/config
-      - ~/filebrowser/filebrowser.db:/database.db \
-      - ~/filebrowser/.filebrowser.json:/.filebrowser.json \
+      - ../services/filebrowser/config:/config
+      - ../services/filebrowser/filebrowser.db:/database.db \
+      - ../services/filebrowser/.filebrowser.json:/.filebrowser.json \
     ports:
       - "48082:80"
     environment:
