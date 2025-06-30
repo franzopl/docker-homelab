@@ -12,3 +12,5 @@ services:
     volumes:
       - ../services/jellyfin:/config
       - /media:/media
+    devices:
+     - /dev/dri:/dev/dri
