@@ -11,6 +11,7 @@ services:
       - ../services/radarr:/config
       - /mnt:/mnt #optional
       - /media:/media
+      - /home:/home
       
       
     ports:
@@ -28,6 +29,7 @@ services:
       - ../services/sonarr:/config
       - /mnt:/mnt #optional
       - /media:/media
+      - /home:/home
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -44,6 +46,8 @@ services:
       - ../services/lidarr:/config
       - /mnt:/mnt #optional
       - /media:/media
+      - /home:/home
+
     ports:
       - 8686:8686
     restart: unless-stopped
@@ -59,6 +63,8 @@ services:
       - ../services/prowlarr:/config
       - /mnt:/mnt #optional
       - /media:/media
+      - /home:/home
+
     ports:
       - 9696:9696
     restart: unless-stopped
@@ -74,6 +80,26 @@ services:
       - ../services/bazarr:/config
       - /mnt:/mnt #optional
       - /media:/media
+      - /home:/home
+
     ports:
       - 6767:6767
+    restart: unless-stopped
+
+
+  autobrr:
+    image: ghcr.io/autobrr/autobrr:latest
+    container_name: autobrr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Recife
+    volumes:
+      - ../services/autobrr:/config
+      - /mnt:/mnt #optional
+      - /media:/media
+      - /home:/home
+
+    ports:
+      - 7474:7474
     restart: unless-stopped
