@@ -1,13 +1,12 @@
-
 services:
   filebrowser:
     image: filebrowser/filebrowser:latest
     container_name: filebrowser
+    user: "1000:1000" # Garante que o contêiner rode como francisco
     volumes:
-      - /:/srv
-      - ../services/filebrowser/config:/config
-      - ../services/filebrowser/filebrowser.db:/database.db \
-      - ../services/filebrowser/.filebrowser.json:/.filebrowser.json \
+      - /home/francisco:/srv
+      - ../services/filebrowser/config/filebrowser.db:/database.db # Mapeia o diretório de configuração
+      - ../services/filebrowser/config/filebrowser.json:/filebrowser.json # Mapeia o arquivo do banco de dados
     ports:
       - "48082:80"
     environment:
