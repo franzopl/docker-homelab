@@ -1,0 +1,27 @@
+services:
+  qbittorrent:
+    image: qbittorrentofficial/qbittorrent-nox:latest
+    container_name: qbittorrent2
+    environment:
+      - PUID=1000 # Substitua pelo UID do usuário do sistema
+      - PGID=1000 # Substitua pelo GID do usuário do sistema
+      - TZ=America/Sao_Paulo # Ajuste para seu fuso horário
+      - UMASK=022 # Máscara de permissão para arquivos
+      - WEBUI_PORT=8080 # Porta da interface web
+    ports:
+      - "8081:8080" # Porta para acesso à interface web
+      - "6882:6881" # Porta para tráfego de torrent (TCP)
+      - "6882:6881/udp" # Porta para tráfego de torrent (UDP)
+      - "56661:56660"
+      - "56661:56660/udp"
+    volumes:
+      - ../services/qbittorrent2:/config # Volume para configurações
+      - /media:/media # Caminho para salvar downloads
+      - /home:/home
+    restart: unless-stopped
+    networks:
+      - qbittorrent_network
+
+networks:
+  qbittorrent_network:
+    driver: bridge
