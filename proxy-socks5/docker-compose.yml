@@ -1,0 +1,31 @@
+version: '3'
+services:
+  gluetun:
+    image: qmcgaw/gluetun:latest
+    container_name: gluetun
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    environment:
+      - VPN_SERVICE_PROVIDER=custom
+      - VPN_TYPE=wireguard
+     # - WIREGUARD_PRIVATE_KEY= # Substitua por sua chave privada ou utilize o arquivo .env na mesma pasta
+      - WIREGUARD_ADDRESSES=10.2.0.2/32
+      - WIREGUARD_PUBLIC_KEY=uIYz5QpWqSNGRSJw0m4Py3eHR1dXQPb95sIKV8KaEC4=
+      - WIREGUARD_ENDPOINT_IP=154.47.24.193
+      - WIREGUARD_ENDPOINT_PORT=51820
+      - DNS_ADDRESS=10.2.0.1
+      - TZ=America/Sao_Paulo
+    ports:
+      - 1080:1080/tcp # Porta para o proxy SOCKS5
+    restart: unless-stopped
+
+  socks5:
+    image: serjs/go-socks5-proxy:latest
+    container_name: socks5
+    network_mode: service:gluetun
+    depends_on:
+      gluetun:
+        condition: service_healthy
+    restart: unless-stopped
