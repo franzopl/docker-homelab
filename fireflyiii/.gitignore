@@ -1,0 +1,9 @@
+.env
+data/
+.dv.env
+firefly_iii_db/
+firefly_iii_upload/
+
+
+francisco@medialab:~/docker-homelab/fireflyiii$ ls -a
+.  ..  data  .db.env  docker-compose.yml  .env  firefly_iii_db  firefly_iii_upload  .gitignore
