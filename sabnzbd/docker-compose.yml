@@ -1,0 +1,18 @@
+---
+services:
+  sabnzbd:
+    image: lscr.io/linuxserver/sabnzbd:latest
+    container_name: sabnzbd
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Recife
+    volumes:
+      - ../services/sabnzbd:/config
+      - /media/ironwolf/downloads/incomplete-downloads:/incomplete-downloads #optional
+      - /media/ironwolf/downloads:/downloads #optional
+      - /media:/media
+      - /home:/home
+    ports:
+      - 8090:8080
+    restart: unless-stopped

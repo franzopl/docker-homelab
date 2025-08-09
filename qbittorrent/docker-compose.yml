@@ -14,6 +14,8 @@ services:
       - "6881:6881/udp" # Porta para tráfego de torrent (UDP)
       - "56660:56660"
       - "56660:56660/udp"
+      - "35449:35449"
+      - "35449:35449/udp"
     volumes:
       - ../services/qbittorrent:/config # Volume para configurações
       - /media:/media # Caminho para salvar downloads
