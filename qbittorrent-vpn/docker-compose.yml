@@ -25,7 +25,7 @@ services:
 
   qbittorrent:
     image: lscr.io/linuxserver/qbittorrent:latest
-    container_name: qbittorrent
+    container_name: qbittorrent-vpn
     depends_on:
       - protonvpn
     env_file: .env
