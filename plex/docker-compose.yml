@@ -1,0 +1,21 @@
+services:
+  plex:
+    container_name: plex
+    image: ghcr.io/hotio/plex
+    # No modo host, a seção 'ports' é ignorada, pois o container usa a rede do host diretamente.
+    network_mode: host
+    env_file: .env
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+      - TZ=America/Recife
+      - PLEX_CLAIM_TOKEN=${PLEX_CLAIM_TOKEN}
+      # Força o Plex a anunciar este endereço para os clientes da rede local
+      - ADVERTISE_IP=http://192.168.0.8:32400/
+    volumes:
+      - ../services/plex:/config
+      - /media:/media
+    devices:
+      - /dev/dri:/dev/dri
+    restart: unless-stopped

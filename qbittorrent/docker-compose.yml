@@ -1,29 +1,22 @@
 services:
   qbittorrent:
-    image: lscr.io/linuxserver/qbittorrent:latest
+    image: lscr.io/linuxserver/qbittorrent:5.1.2-libtorrentv1
     container_name: qbittorrent
     environment:
-      - PUID=1000 # Substitua pelo UID do usuário do sistema
-      - PGID=1000 # Substitua pelo GID do usuário do sistema
-      - TZ=America/Sao_Paulo # Ajuste para seu fuso horário
-      - UMASK=022 # Máscara de permissão para arquivos
-      - WEBUI_PORT=8080 # Porta da interface web
-    ports:
-      - "8080:8080" # Porta para acesso à interface web
-      - "6881:6881" # Porta para tráfego de torrent (TCP)
-      - "6881:6881/udp" # Porta para tráfego de torrent (UDP)
-      - "56660:56660"
-      - "56660:56660/udp"
-      - "35449:35449"
-      - "35449:35449/udp"
+      - PUID=1000
+      - PGID=1000
+      - TZ=America/Sao_Paulo
+      - UMASK=022
+      - WEBUI_PORT=8081
     volumes:
-      - ../services/qbittorrent:/config # Volume para configurações
-      - /media:/media # Caminho para salvar downloads
+      - ../services/qbittorrent:/config
+      - /media:/media
       - /home:/home
+    ulimits:
+      nofile:
+        soft: 1048576
+        hard: 1048576
+    mem_limit: 6g
+    mem_reservation: 4g
     restart: unless-stopped
-    networks:
-      - qbittorrent_network
-
-networks:
-  qbittorrent_network:
-    driver: bridge
+    network_mode: host

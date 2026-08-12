@@ -1,0 +1,81 @@
+version: 2
+servers: []
+connection_pool:
+    min_connections: 0
+    health_check_interval: 1m
+posting:
+    wait_for_par2: true
+    max_retries: 3
+    retry_delay: 5s
+    article_size_in_bytes: 768000
+    groups:
+        - name: alt.binaries.test
+          enabled: true
+    throttle_rate: 0
+    message_id_format: random
+    post_headers:
+        add_nxg_header: false
+        default_from: ""
+        custom_headers: []
+    obfuscation_policy: full
+    par2_obfuscation_policy: full
+    group_policy: each_file
+post_check:
+    enabled: true
+    delay: 10s
+    max_reposts: 1
+    deferred_check_delay: 5m
+    deferred_max_retries: 5
+    deferred_max_backoff: 1h
+    deferred_check_interval: 2m
+    deferred_batch_size: 0
+par2:
+    enabled: true
+    redundancy: 5%
+    temp_dir: /tmp
+    maintain_par2_files: false
+    skip_if_par2_exists: null
+    parpar_binary_path: ""
+    parpar_extra_args: []
+    num_goroutines: 0
+    memory_limit: 4294967296
+    slice_size: 10485760
+watchers:
+    - name: ""
+      enabled: false
+      watch_directory: ""
+      size_threshold: 104857600
+      schedule:
+        start_time: "00:00"
+        end_time: "23:59"
+      ignore_patterns:
+        - '*.tmp'
+        - '*.part'
+        - '*.!ut'
+      min_file_size: 1048576
+      check_interval: 5m
+      delete_original_file: false
+      single_nzb_per_folder: false
+      follow_symlinks: false
+      min_file_age: 60s
+      min_file_age_to_delete: 0s
+nzb_compression:
+    enabled: false
+    type: none
+    level: 0
+database:
+    database_type: sqlite
+    database_path: /config/postie.db
+queue:
+    max_concurrent_uploads: 1
+output_dir: ./output
+maintain_original_extension: true
+post_upload_script:
+    enabled: false
+    command: ""
+    timeout: 30s
+    max_retries: 3
+    retry_delay: 30s
+    max_backoff: 1h
+    max_retry_duration: 24h
+    retry_check_interval: 1m

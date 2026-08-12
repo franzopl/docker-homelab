@@ -1,7 +1,7 @@
 services:
-  protonvpn:
+  protonvpn-livros:
     image: docker.io/qmcgaw/gluetun:v3.41.3
-    container_name: protonvpn
+    container_name: protonvpn-livros
     cap_add:
       - NET_ADMIN
     devices:
@@ -16,12 +16,7 @@ services:
       - VPN_PORT_FORWARDING=${VPN_PORT_FORWARDING}
       - SERVER_COUNTRIES=${SERVER_COUNTRIES}
       - PORT_FORWARD_ONLY=on
-      # --- MELHORIAS DE DNS ---
-      - DOT=off
-      - DNS_KEEP_NAMESERVERS=off
-      - DNS_ADDRESS=1.1.1.1
-      # ------------------------
-      - VPN_PORT_FORWARDING_UP_COMMAND=/bin/sh -c '/usr/bin/wget -O- --retry-connrefused --post-data "json={\"listen_port\":{{PORTS}}}" http://127.0.0.1:${QBITTORRENT_WEBUI_PORT}/api/v2/app/setPreferences 2>&1'
+      - VPN_PORT_FORWARDING_UP_COMMAND=/bin/sh -c 'sleep 60 && /usr/bin/wget -O- --retry-connrefused --tries=30 --waitretry=10 --post-data "json={\"listen_port\":{{PORTS}}}" http://127.0.0.1:${QBITTORRENT_WEBUI_PORT}/api/v2/app/setPreferences 2>&1'
     volumes:
       - ./vpn:/gluetun
     ports:
@@ -36,11 +31,11 @@ services:
     labels:
       - autoheal=true
 
-  qbittorrent:
-    image: lscr.io/linuxserver/qbittorrent:latest
-    container_name: qbittorrent-vpn
+  qbittorrent-livros:
+    image: lscr.io/linuxserver/qbittorrent:5.2.3-libtorrentv1
+    container_name: qbittorrent-livros
     depends_on:
-      protonvpn:
+      protonvpn-livros:
         condition: service_healthy
     env_file: .env
     environment:
@@ -49,13 +44,9 @@ services:
       - TZ=${TZ}
       - WEBUI_PORT=${QBITTORRENT_WEBUI_PORT}
     volumes:
-      - ../services/qbittorrent-vpn/config:/config
+      - ../services/qbittorrent-livros/config:/config
       - /media/:/media/
       - /home/:/home/
       - /media/barracuda/downloads:/downloads
-    network_mode: "service:protonvpn"
+    network_mode: "service:protonvpn-livros"
     restart: unless-stopped
-    # --- MELHORIA DE ESTABILIDADE (IPv4 Force) ---
-    sysctls:
-      - net.ipv6.conf.all.disable_ipv6=1
-    # ---------------------------------------------

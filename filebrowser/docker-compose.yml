@@ -4,7 +4,7 @@ services:
     container_name: filebrowser
     user: "1000:1000" # Garante que o contêiner rode como francisco
     volumes:
-      - /home/francisco:/srv
+      - /:/srv
       - ../services/filebrowser/config/filebrowser.db:/database.db # Mapeia o diretório de configuração
       - ../services/filebrowser/config/filebrowser.json:/filebrowser.json # Mapeia o arquivo do banco de dados
     ports:

@@ -1,0 +1,22 @@
+services:
+  postie:
+    container_name: postie
+    image: ghcr.io/javi11/postie:latest
+    ports:
+      - "8088:8080"
+    volumes:
+      - ./config:/config
+      - ./watch:/watch
+      - ./output:/output
+    environment:
+      - PORT=8080
+      - HOST=0.0.0.0
+      - PUID=1000
+      - PGID=1000
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/live"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 5s

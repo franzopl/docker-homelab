@@ -7,6 +7,11 @@ services:
       - "7476:7476"
     volumes:
       - ../services/qui:/config
+      - /media/ironwolf/:/media/ironwolf/
+      - /media/barracuda/:/media/barracuda/
+      - /media/seagate1/:/media/seagate1/
+      - /media/seagate2/:/media/seagate2/
+      - /home/francisco/:/home/francisco/
 #    environment:
       # Server configuration
       # Default: 0.0.0.0 in containers

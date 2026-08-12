@@ -1,0 +1,27 @@
+services:
+  windows:
+    image: dockurr/windows
+    container_name: windows
+    env_file: .env
+    environment:
+      VERSION: "11"
+      DISK_SIZE: "120G"
+      RAM_SIZE: "8G"
+      CPU_CORES: "4"
+      USERNAME: ${USERNAME}
+      PASSWORD: ${PASSWORD}
+      REGION: "pt-BR"
+      KEYBOARD: "pt-BR"
+    devices:
+      - /dev/kvm
+      - /dev/net/tun
+    cap_add:
+      - NET_ADMIN
+    ports:
+      - 8006:8006
+      - 3389:3389/tcp
+      - 3389:3389/udp
+    volumes:
+      - ./windows:/storage
+    restart: always
+    stop_grace_period: 2m

@@ -12,6 +12,7 @@ services:
       - ../services/adguardhome/work:/opt/adguardhome/work
       - ../services/adguardhome/conf:/opt/adguardhome/conf
       - ../services/adguardhome/cert:/cert
+      - ../services/npm/letsencrypt:/opt/adguardhome/ssl:ro
     environment:
       - TZ=America/Sao_Paulo
     restart: unless-stopped

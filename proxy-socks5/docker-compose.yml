@@ -21,6 +21,14 @@ services:
     ports:
       - 1080:1080/tcp
     restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "https://1.1.1.1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    labels:
+      - autoheal=true
 
   socks5:
     image: serjs/go-socks5-proxy:latest

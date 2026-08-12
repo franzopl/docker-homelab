@@ -1,0 +1,21 @@
+services:
+  n8n:
+    image: n8nio/n8n
+    restart: unless-stopped
+    ports:
+      - '5678:5678'
+    env_file: .env
+    volumes:
+      # CORRIGIDO: Mapeamento de um diretório do host (../services/n8n)
+      # para o diretório ABSOLUTO de dados do n8n no contêiner (/home/node/.n8n).
+      - ../services/n8n:/home/node/.n8n 
+    environment:
+      # Defina o fuso horário para garantir que agendamentos e logs estejam corretos
+      - GENERIC_TIMEZONE=America/Sao_Paulo
+      - N8N_HOST=https://n8n.felipe.in
+      - N8N_PROTOCOL=http # ⚠️ ATENÇÃO: Se usar HTTPS no N8N_HOST, pode precisar mudar para N8N_PROTOCOL=https (veja a nota abaixo).
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=${N8N_BASIC_AUTH_USER}
+      - N8N_BASIC_AUTH_PASSWORD=${N8N_BASIC_AUTH_PASSWORD}
+
+# REMOVIDO: A seção 'volumes:' não é mais necessária, pois estamos usando um bind mount.
